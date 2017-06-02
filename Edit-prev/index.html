@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Web storage</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+
+<main>
+
+    <div id="formul" class="jumbotron">
+    <h1>Edition</h1>
+
+
+    <label for="nom">NOM</label>
+     <input type="text" id="nom" />
+
+
+    </br>
+
+    <label for="valeur">VALEUR</label>
+    <input type="text" id="valeur" />
+    </br>
+
+
+    <a href='#'><button id="btn_read">Lire</button></a>
+    <a href='#'><button id="btn_wright">Ecrire</button></a>
+    <a href='#'><button id="btn_erase">Effacer</button></a>
+    <a href='#'><button id="btn_init">Réinitialiser</button></a>
+  </div>
+
+
+  <div class="jumbotron">
+    <h1>Prévisualisation</h1>
+  <p id="previsu"> prev </p>
+  </div>
+
+  </main>
+
+  <script>
+  document.getElementById("btn_read").onclick = function(){
+  var monNom = document.getElementById("nom").value;
+  var maValeur = document.getElementById("valeur").value;
+  // var espace= ' ';
+  // var texte = (monNom + espace + maValeur);
+  var monobjet  = {
+  propriete1 : monNom,
+  propriete2 : maValeur
+};
+
+  var monobjet_json = JSON.stringify(monobjet);
+  localStorage.setItem("objet",monobjet_json);
+
+  document.getElementById("btn_wright").onclick = function(){
+    var monobjet_json = localStorage.getItem("objet");
+    var monobjet = JSON.parse(monobjet_json);
+// Affichage dans le paragraphe
+      document.getElementById("previsu").innerHTML = monobjet_json;
+    };
+
+    document.getElementById("btn_erase").onclick = function(){
+      localStorage.removeItem("objet");
+      vidage = "";
+      document.getElementById('previsu').innerHTML = vidage;
+    };
+
+
+    document.getElementById("btn_init").onclick = function(){
+      localStorage.clear();
+      vidage = "";
+      document.getElementById('previsu').innerHTML = vidage;
+    };
+
+}
+  </script>
+
+
+
+
+</body>
+</html>
